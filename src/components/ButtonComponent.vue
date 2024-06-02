@@ -92,6 +92,8 @@ export default defineComponent({
     margin-right: 8px;
     display: flex;
     align-items: center;
+    height: 22px;
+    width: 22px;
   }
 
   .button--text {

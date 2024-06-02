@@ -8,8 +8,16 @@
     aria-labelledby="icons--pika"
   >
     <title id="icons--pika">Pika Icon</title>
+    <circle
+      cx="152"
+      cy="172"
+      r="104"
+      fill="#F22539"
+      stroke="black"
+      stroke-width="2"
+    />
     <mask
-      id="mask0_2_304"
+      id="mask0_0_1"
       style="mask-type: alpha"
       maskUnits="userSpaceOnUse"
       x="0"
@@ -23,9 +31,9 @@
         fill="#C4C4C4"
       />
     </mask>
-    <g mask="url(#mask0_2_304)">
+    <g mask="url(#mask0_0_1)">
       <mask
-        id="mask1_2_304"
+        id="mask1_0_1"
         style="mask-type: alpha"
         maskUnits="userSpaceOnUse"
         x="7"
@@ -40,7 +48,7 @@
           fill="#C4C4C4"
         />
       </mask>
-      <g mask="url(#mask1_2_304)">
+      <g mask="url(#mask1_0_1)">
         <path
           d="M217.706 138.701C217.706 138.701 246.647 143.355 268.39 150.356C290.132 157.351 309.1 169.235 309.1 169.235C309.1 169.235 307.357 208.515 294.054 233.525C278.447 223.046 239.901 202.035 221.368 195.497C226.137 205.163 233.591 224.229 237.567 241.742C228.061 241.589 215.33 243.979 215.33 243.979L197.62 183.777L217.706 138.701Z"
           fill="#F8CC46"
