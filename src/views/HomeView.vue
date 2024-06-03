@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ButtonComponent from '@/components/ButtonComponent.vue';
+import Button from '@/components/ButtonComponent.vue';
 import PikaIcon from '@/components/icons/PikaIcon.vue';
 
 const buttonText = 'Get started';
@@ -13,10 +13,10 @@ const descriptionText =
     <PikaIcon />
     <h1 class="vuekemon--home-headline">{{ headlineText }}</h1>
     <p class="vuekemon--home-description">{{ descriptionText }}</p>
-    <ButtonComponent
+    <Button
       type="primary"
       @click="$router.push({ name: 'pokedex' })"
-      >{{ buttonText }}</ButtonComponent
+      >{{ buttonText }}</Button
     >
   </section>
 </template>
@@ -26,7 +26,8 @@ const descriptionText =
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 64px 16px;
+  justify-content: center;
+  padding: 48px 16px 128px;
   height: 100vh;
   overflow: hidden;
   text-align: center;

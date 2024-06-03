@@ -10,7 +10,7 @@ const props = defineProps<{
   <button class="vuekemon--star">
     <StarIcon
       class="vuekemon--star-icon"
-      :fill="isFavorite ? '#eca539' : '#bfbfbf'"
+      :fill="props.isFavorite ? '#eca539' : '#bfbfbf'"
     />
   </button>
 </template>
@@ -20,8 +20,8 @@ const props = defineProps<{
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 44px;
-  min-height: 44px;
+  min-width: 48px;
+  min-height: 48px;
   border-radius: 50%;
   background-color: $colors--background;
   transition: background-color 0.3s;

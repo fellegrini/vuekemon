@@ -59,7 +59,11 @@ const buttonClass = computed(() => ({
 
   &.button--secondary {
     background-color: $colors--grey-light;
-    color: $colors--black;
+    color: $colors--white;
+
+    &:hover:not(:disabled) {
+      background-color: $colors--red-light;
+    }
   }
 
   &:disabled {
@@ -69,7 +73,7 @@ const buttonClass = computed(() => ({
   }
 
   .button--icon {
-    margin-right: 8px;
+    margin-right: 10px;
     display: flex;
     align-items: center;
     height: 22px;

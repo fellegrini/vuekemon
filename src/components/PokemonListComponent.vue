@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { usePokemonStore, type Pokemon } from '@/store/pokestore';
-import StarComponent from '@/components/StarComponent.vue';
+import Star from '@/components/StarComponent.vue';
 
 const pokemonStore = usePokemonStore();
 const displayedPokemon = ref<Pokemon[]>([]);
@@ -11,7 +11,7 @@ const pokemonListRef = ref<HTMLUListElement | null>(null);
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const loadPokemonList = async () => {
-  await delay(3000); // Delay for 3 seconds for improved UX (shows Suspense fallback in the meantime).
+  await delay(3000); // Delay for 3 seconds for improved UX (shows Suspense fallback longer).
   await pokemonStore.fetchPokemonList().catch((e) => {
     console.error(e);
   });
@@ -62,7 +62,7 @@ const toggleFavorite = (pokemon: Pokemon) => {
       <button class="vuekemon--pokemon-list-button">
         {{ pokemon.name }}
       </button>
-      <StarComponent
+      <Star
         :isFavorite="pokemon.isFavorite"
         @click="toggleFavorite(pokemon)"
       />
@@ -96,6 +96,8 @@ const toggleFavorite = (pokemon: Pokemon) => {
     margin-bottom: 8px;
     background-color: $colors--white;
     padding-right: 8px;
+    border-radius: 5px;
+    gap: 8px;
   }
 
   &-button {

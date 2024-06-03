@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import PokemonList from '@/components/PokemonList.vue';
+import BottomBar from '@/components/BottomBarComponent.vue';
+import PokemonList from '@/components/PokemonListComponent.vue';
 import PokeballIcon from '@/components/icons/PokeballIcon.vue';
 </script>
 
@@ -7,7 +8,10 @@ import PokeballIcon from '@/components/icons/PokeballIcon.vue';
   <section class="vuekemon--podedex">
     <Suspense>
       <template #default>
-        <PokemonList />
+        <div class="vuekemon--pokedex-list">
+          <PokemonList />
+          <BottomBar />
+        </div>
       </template>
       <template #fallback>
         <div class="vuekemon--pokeball-loader">
@@ -15,15 +19,27 @@ import PokeballIcon from '@/components/icons/PokeballIcon.vue';
         </div>
       </template>
     </Suspense>
+    <BottomBar />
   </section>
 </template>
 
 <style lang="scss">
-.vuekemon--podedex {
-  padding: 24px;
-  height: 100vh;
+.vuekemon--podedex,
+.vuekemon--pokeball-loader {
+  min-height: 100vh;
+  width: 100%;
   background-color: $colors--background;
   display: grid;
   place-items: center;
+}
+
+.vuekemon--pokedex-list {
+  height: 100%;
+  width: 100%;
+  padding: 24px;
+}
+
+.vuekemon--pokeball-loader {
+  z-index: 3;
 }
 </style>
