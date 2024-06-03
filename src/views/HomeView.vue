@@ -13,7 +13,11 @@ const descriptionText =
     <PikaIcon />
     <h1 class="vuekemon--home-headline">{{ headlineText }}</h1>
     <p class="vuekemon--home-description">{{ descriptionText }}</p>
-    <ButtonComponent type="primary">{{ buttonText }}</ButtonComponent>
+    <ButtonComponent
+      type="primary"
+      @click="$router.push({ name: 'pokedex' })"
+      >{{ buttonText }}</ButtonComponent
+    >
   </section>
 </template>
 
@@ -21,7 +25,6 @@ const descriptionText =
 .vuekemon--home {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
   flex-direction: column;
   padding: 64px 16px;
   height: 100vh;
@@ -45,5 +48,3 @@ const descriptionText =
   }
 }
 </style>
-
-<!-- @click="$router.push({ name: 'pokedex' })" -->

@@ -16,38 +16,20 @@
   </button>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed } from 'vue';
-import type { PropType } from 'vue';
+<script setup lang="ts">
+import { computed, defineComponent } from 'vue';
 
-export default defineComponent({
-  name: 'ButtonComponent',
-  props: {
-    type: {
-      type: String as PropType<'primary' | 'secondary'>,
-      default: 'primary'
-    },
-    icon: {
-      type: Object as PropType<ReturnType<typeof defineComponent>>,
-      default: null
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    }
-  },
-  setup(props) {
-    const buttonClass = computed(() => ({
-      'vuekemon--button': true,
-      'button--primary': props.type === 'primary',
-      'button--secondary': props.type === 'secondary'
-    }));
+const props = defineProps<{
+  type: 'primary' | 'secondary';
+  icon?: ReturnType<typeof defineComponent>;
+  disabled?: boolean;
+}>();
 
-    return {
-      buttonClass
-    };
-  }
-});
+const buttonClass = computed(() => ({
+  'vuekemon--button': true,
+  'button--primary': props.type === 'primary',
+  'button--secondary': props.type === 'secondary'
+}));
 </script>
 
 <style scoped lang="scss">
@@ -56,9 +38,7 @@ export default defineComponent({
   align-items: center;
   justify-content: center;
   padding: 12px 20px;
-  border: none;
   border-radius: 60px;
-  cursor: pointer;
   font-size: 18px;
   transition: background-color 0.3s;
   font-family: $fonts--lato;
