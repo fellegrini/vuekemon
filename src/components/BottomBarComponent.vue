@@ -1,20 +1,31 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import Button from '@/components/ButtonComponent.vue';
 import MenuIcon from '@/components/icons/MenuIcon.vue';
 import SingleStar from '@/components/icons/SingleStarIcon.vue';
+
+const activeButton = ref<'all' | 'favorites'>('all');
+const emit = defineEmits(['changeActive']);
+
+const setActiveButton = (button: 'all' | 'favorites') => {
+  activeButton.value = button;
+  emit('changeActive', button);
+};
 </script>
 
 <template>
   <footer class="vuekemon--bottom-bar">
     <Button
       :icon="MenuIcon"
-      type="primary"
+      :type="activeButton === 'all' ? 'primary' : 'secondary'"
+      @click="setActiveButton('all')"
     >
       All
     </Button>
     <Button
       :icon="SingleStar"
-      type="secondary"
+      :type="activeButton === 'favorites' ? 'primary' : 'secondary'"
+      @click="setActiveButton('favorites')"
     >
       Favorites
     </Button>

@@ -1,7 +1,14 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import BottomBar from '@/components/BottomBarComponent.vue';
 import PokemonList from '@/components/PokemonListComponent.vue';
 import PokeballIcon from '@/components/icons/PokeballIcon.vue';
+
+const currentView = ref<'all' | 'favorites'>('all');
+
+const handleViewChange = (view: 'all' | 'favorites') => {
+  currentView.value = view;
+};
 </script>
 
 <template>
@@ -9,8 +16,8 @@ import PokeballIcon from '@/components/icons/PokeballIcon.vue';
     <Suspense>
       <template #default>
         <div class="vuekemon--pokedex-list">
-          <PokemonList />
-          <BottomBar />
+          <PokemonList :view="currentView" />
+          <BottomBar @change-active="handleViewChange" />
         </div>
       </template>
       <template #fallback>
@@ -19,7 +26,6 @@ import PokeballIcon from '@/components/icons/PokeballIcon.vue';
         </div>
       </template>
     </Suspense>
-    <BottomBar />
   </section>
 </template>
 

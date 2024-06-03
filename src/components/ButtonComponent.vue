@@ -53,7 +53,7 @@ const buttonClass = computed(() => ({
     }
 
     &:active:not(:disabled) {
-      background-color: $colors--red;
+      background-color: $colors--red-light;
     }
   }
 
