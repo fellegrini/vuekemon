@@ -14,8 +14,6 @@ import { RouterView } from 'vue-router';
 </template>
 
 <style lang="scss">
-@import '@/assets/scss/_reset.scss';
-
 .slide-enter-active,
 .slide-leave-active {
   transition: all 0.4s 0.1s cubic-bezier(0.68, -0.55, 0.265, 1.5);

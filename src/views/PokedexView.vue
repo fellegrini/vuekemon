@@ -1,11 +1,16 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+import { usePokemonStore, type Pokemon } from '@/store/pokestore';
 import SearchBar from '@/components/SearchBarComponent.vue';
 import BottomBar from '@/components/BottomBarComponent.vue';
 import PokemonList from '@/components/PokemonListComponent.vue';
 import PokeballIcon from '@/components/icons/PokeballIcon.vue';
-import { usePokemonStore } from '@/store/pokestore';
+import ModalComponent from '@/components/ModalComponent.vue';
+import PokemonSummary from '@/components/PokemonSummaryComponent.vue';
 
 const pokemonStore = usePokemonStore();
+const modalVisible = ref(false);
+const selectedPokemon = ref<Pokemon | null>(null);
 
 const handleViewChange = (view: 'all' | 'favorites') => {
   pokemonStore.setView(view);
@@ -13,6 +18,18 @@ const handleViewChange = (view: 'all' | 'favorites') => {
 
 const handleSearch = (searchTerm: string) => {
   pokemonStore.setSearchTerm(searchTerm);
+};
+
+const showModal = async (pokemonName: string) => {
+  await pokemonStore.fetchPokemonDetails(pokemonName);
+  selectedPokemon.value =
+    pokemonStore.pokemonList.find((p) => p.name === pokemonName) || null;
+  modalVisible.value = true;
+};
+
+const closeModal = () => {
+  modalVisible.value = false;
+  selectedPokemon.value = null;
 };
 </script>
 
@@ -22,7 +39,7 @@ const handleSearch = (searchTerm: string) => {
       <template #default>
         <div class="vuekemon--pokedex-list">
           <SearchBar @search="handleSearch" />
-          <PokemonList />
+          <PokemonList @show-modal="showModal" />
           <BottomBar @change-active="handleViewChange" />
         </div>
       </template>
@@ -32,6 +49,19 @@ const handleSearch = (searchTerm: string) => {
         </div>
       </template>
     </Suspense>
+    <Transition
+      name="fade"
+      mode="out-in"
+    >
+      <ModalComponent
+        :visible="modalVisible"
+        @close="closeModal"
+      >
+        <template v-if="selectedPokemon">
+          <PokemonSummary :pokemon="selectedPokemon" />
+        </template>
+      </ModalComponent>
+    </Transition>
   </section>
 </template>
 
@@ -53,5 +83,15 @@ const handleSearch = (searchTerm: string) => {
 
 .vuekemon--pokeball-loader {
   z-index: 3;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

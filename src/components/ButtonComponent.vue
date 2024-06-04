@@ -1,3 +1,19 @@
+<script setup lang="ts">
+import { computed, defineComponent } from 'vue';
+
+const props = defineProps<{
+  type: 'primary' | 'secondary';
+  icon?: ReturnType<typeof defineComponent>;
+  disabled?: boolean;
+}>();
+
+const buttonClass = computed(() => ({
+  'vuekemon--button': true,
+  'button--primary': props.type === 'primary',
+  'button--secondary': props.type === 'secondary'
+}));
+</script>
+
 <template>
   <button
     :class="buttonClass"
@@ -15,22 +31,6 @@
     </span>
   </button>
 </template>
-
-<script setup lang="ts">
-import { computed, defineComponent } from 'vue';
-
-const props = defineProps<{
-  type: 'primary' | 'secondary';
-  icon?: ReturnType<typeof defineComponent>;
-  disabled?: boolean;
-}>();
-
-const buttonClass = computed(() => ({
-  'vuekemon--button': true,
-  'button--primary': props.type === 'primary',
-  'button--secondary': props.type === 'secondary'
-}));
-</script>
 
 <style scoped lang="scss">
 .vuekemon--button {
@@ -83,6 +83,7 @@ const buttonClass = computed(() => ({
   .button--text {
     display: flex;
     align-items: center;
+    white-space: nowrap;
   }
 }
 </style>

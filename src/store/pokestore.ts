@@ -4,7 +4,18 @@ export interface Pokemon {
   name: string;
   url: string;
   isFavorite?: boolean;
-  details?: any /** TODO: CHANGE AFTER TESTING INTERFACE */;
+  details?: {
+    weight: number;
+    height: number;
+    types: {
+      slot: number;
+      type: {
+        name: string;
+        url: string;
+      };
+    };
+    spriteURL: string;
+  };
 }
 
 interface State {
@@ -12,6 +23,7 @@ interface State {
   favorites: string[];
   searchTerm: string;
   view: 'all' | 'favorites';
+  error: string;
 }
 
 export const usePokemonStore = defineStore('pokestore', {
@@ -19,13 +31,22 @@ export const usePokemonStore = defineStore('pokestore', {
     pokemonList: [],
     favorites: JSON.parse(localStorage.getItem('favorites') || '[]'),
     searchTerm: '',
-    view: 'all'
+    view: 'all',
+    error: ''
   }),
   actions: {
     async fetchPokemonList() {
       const response = await fetch(
         'https://pokeapi.co/api/v2/pokemon?limit=-1'
-      );
+      ).catch((e: Error) => {
+        this.error = e.message;
+        return undefined;
+      });
+
+      if (!response) {
+        return;
+      }
+
       const data = await response.json();
       this.pokemonList = data.results.map((pokemon: Pokemon) => ({
         ...pokemon,
@@ -33,11 +54,31 @@ export const usePokemonStore = defineStore('pokestore', {
       }));
     },
     async fetchPokemonDetails(name: string) {
-      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
-      const data = await response.json();
       const pokemon = this.pokemonList.find((p) => p.name === name);
-      if (pokemon) {
-        pokemon.details = data;
+
+      if (pokemon && !pokemon.details) {
+        const response = await fetch(
+          `https://pokeapi.co/api/v2/pokemon/${name}`
+        ).catch((e: Error) => {
+          console.log(e);
+          this.error = e.message;
+          return undefined;
+        });
+
+        if (!response) {
+          return;
+        }
+
+        const data = await response.json();
+
+        if (data) {
+          pokemon.details = {
+            weight: data.weight,
+            height: data.height,
+            types: data.types,
+            spriteURL: data.sprites.front_default
+          };
+        }
       }
     },
     toggleFavorite(pokemonName: string) {
@@ -54,6 +95,9 @@ export const usePokemonStore = defineStore('pokestore', {
     },
     setView(view: 'all' | 'favorites') {
       this.view = view;
+    },
+    setErrorMessage(error: string) {
+      this.error = error;
     }
   },
   getters: {
@@ -71,6 +115,7 @@ export const usePokemonStore = defineStore('pokestore', {
       return state.pokemonList.filter((pokemon) =>
         state.favorites.includes(pokemon.name)
       );
-    }
+    },
+    errorMessage: (state) => state.error
   }
 });

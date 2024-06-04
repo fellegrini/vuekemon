@@ -23,6 +23,7 @@ watch(searchTerm, (newTerm) => {
     <MagnifierIcon class="vuekemon--search-bar-icon" />
     <input
       type="text"
+      name="search"
       v-model="searchTerm"
       placeholder="Search"
       class="vuekemon--search-bar-input"
@@ -57,6 +58,7 @@ watch(searchTerm, (newTerm) => {
     font-family: $fonts--montserrat;
     border-radius: $border--radius;
     padding: 0;
+    padding-left: 6px;
   }
 }
 </style>

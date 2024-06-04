@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import { usePokemonStore, type Pokemon } from '@/store/pokestore';
+import capitalizeFirstLetter from '@/utils/capitalize';
 import Star from '@/components/StarComponent.vue';
+import NotFound from '@/components/NotFoundComponent.vue';
 
 const pokemonStore = usePokemonStore();
 const displayedPokemon = ref<Pokemon[]>([]);
 const limit = ref(20);
 const pokemonListRef = ref<HTMLUListElement | null>(null);
+const emits = defineEmits(['show-modal']);
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -44,8 +47,8 @@ const toggleFavorite = (pokemon: Pokemon) => {
   pokemon.isFavorite = !pokemon.isFavorite;
 };
 
-const capitalizeFirstLetter = (name: string) => {
-  return name.charAt(0).toUpperCase() + name.slice(1);
+const showDetails = (pokemonName: string) => {
+  emits('show-modal', pokemonName);
 };
 
 await loadPokemonList();
@@ -71,13 +74,14 @@ watch(
         class="vuekemon--pokemon-list-item"
         v-for="pokemon in displayedPokemon"
         :key="pokemon.name"
+        @click="showDetails(pokemon.name)"
       >
         <button class="vuekemon--pokemon-list-button">
           {{ capitalizeFirstLetter(pokemon.name) }}
         </button>
         <Star
           :isFavorite="pokemon.isFavorite"
-          @click="toggleFavorite(pokemon)"
+          @click.stop="toggleFavorite(pokemon)"
         />
       </li>
     </TransitionGroup>
@@ -86,7 +90,11 @@ watch(
     v-else
     class="vuekemon--pokemon-list-empty"
   >
-    The server does not respond.
+    <NotFound
+      :descriptionText="
+        pokemonStore.errorMessage || 'You look lost on your journey!'
+      "
+    />
   </div>
 </template>
 
@@ -99,6 +107,18 @@ watch(
 
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  &-empty {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    height: 100%;
+    background-color: $colors--background;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    z-index: 3;
   }
 
   &-item {
