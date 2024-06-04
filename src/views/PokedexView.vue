@@ -68,7 +68,7 @@ const closeModal = () => {
 <style lang="scss">
 .vuekemon--pokedex,
 .vuekemon--pokeball-loader {
-  min-height: 100vh;
+  min-height: 100%;
   width: 100%;
   background-color: $colors--background;
   display: grid;
@@ -83,6 +83,7 @@ const closeModal = () => {
 
 .vuekemon--pokeball-loader {
   z-index: 3;
+  height: 100%;
 }
 
 .fade-enter-active,

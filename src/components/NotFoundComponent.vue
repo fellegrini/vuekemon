@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
-import { usePokemonStore } from '@/store/pokestore';
 import Button from '@/components/ButtonComponent.vue';
 
 const props = defineProps<{
@@ -8,13 +7,9 @@ const props = defineProps<{
 }>();
 const buttonText = 'Go back home';
 const router = useRouter();
-const pokemonStore = usePokemonStore();
 
 const handleClick = () => {
   router.push({ name: 'home' });
-  router.beforeResolve(() => {
-    pokemonStore.setSearchTerm('');
-  });
 };
 </script>
 

@@ -28,7 +28,7 @@ const descriptionText =
   flex-direction: column;
   justify-content: center;
   padding: 48px 16px 128px;
-  height: 100vh;
+  height: 100%;
   overflow: hidden;
   text-align: center;
 

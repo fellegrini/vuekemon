@@ -1,5 +1,14 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router';
+import { RouterView, useRouter } from 'vue-router';
+import { usePokemonStore } from './store/pokestore';
+const router = useRouter();
+const store = usePokemonStore();
+
+router.beforeEach(() => {
+  store.setSearchTerm('');
+  store.setErrorMessage('');
+  store.setView('all');
+});
 </script>
 
 <template>

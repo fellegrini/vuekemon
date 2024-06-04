@@ -104,6 +104,7 @@ watch(
   width: 100%;
   overflow-y: scroll;
   scrollbar-width: none;
+  padding-bottom: 120px;
 
   &::-webkit-scrollbar {
     display: none;

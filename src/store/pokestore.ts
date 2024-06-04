@@ -60,7 +60,6 @@ export const usePokemonStore = defineStore('pokestore', {
         const response = await fetch(
           `https://pokeapi.co/api/v2/pokemon/${name}`
         ).catch((e: Error) => {
-          console.log(e);
           this.error = e.message;
           return undefined;
         });
