@@ -3,8 +3,6 @@ import { ref, watch } from 'vue';
 import { usePokemonStore, type Pokemon } from '@/store/pokestore';
 import Star from '@/components/StarComponent.vue';
 
-const props = defineProps<{ view: 'all' | 'favorites' }>();
-
 const pokemonStore = usePokemonStore();
 const displayedPokemon = ref<Pokemon[]>([]);
 const limit = ref(20);
@@ -21,12 +19,10 @@ const loadPokemonList = async () => {
 };
 
 const updateDisplayedPokemon = () => {
-  const list =
-    props.view === 'favorites'
-      ? pokemonStore.favoritePokemon
-      : pokemonStore.filteredPokemonList;
-
-  displayedPokemon.value = list.slice(0, limit.value);
+  displayedPokemon.value = pokemonStore.filteredPokemonList.slice(
+    0,
+    limit.value
+  );
 };
 
 const handleScroll = () => {
@@ -48,10 +44,14 @@ const toggleFavorite = (pokemon: Pokemon) => {
   pokemon.isFavorite = !pokemon.isFavorite;
 };
 
+const capitalizeFirstLetter = (name: string) => {
+  return name.charAt(0).toUpperCase() + name.slice(1);
+};
+
 await loadPokemonList();
 
 watch(
-  () => props.view,
+  () => [pokemonStore.view, pokemonStore.searchTerm],
   () => {
     limit.value = 20;
     updateDisplayedPokemon();
@@ -73,7 +73,7 @@ watch(
         :key="pokemon.name"
       >
         <button class="vuekemon--pokemon-list-button">
-          {{ pokemon.name }}
+          {{ capitalizeFirstLetter(pokemon.name) }}
         </button>
         <Star
           :isFavorite="pokemon.isFavorite"
@@ -109,7 +109,7 @@ watch(
     margin-bottom: 8px;
     background-color: $colors--white;
     padding-right: 8px;
-    border-radius: 5px;
+    border-radius: $border--radius;
     gap: 8px;
   }
 

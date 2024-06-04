@@ -11,13 +11,15 @@ interface State {
   pokemonList: Pokemon[];
   favorites: string[];
   searchTerm: string;
+  view: 'all' | 'favorites';
 }
 
 export const usePokemonStore = defineStore('pokestore', {
   state: (): State => ({
     pokemonList: [],
     favorites: JSON.parse(localStorage.getItem('favorites') || '[]'),
-    searchTerm: ''
+    searchTerm: '',
+    view: 'all'
   }),
   actions: {
     async fetchPokemonList() {
@@ -49,13 +51,21 @@ export const usePokemonStore = defineStore('pokestore', {
     },
     setSearchTerm(searchTerm: string) {
       this.searchTerm = searchTerm;
+    },
+    setView(view: 'all' | 'favorites') {
+      this.view = view;
     }
   },
   getters: {
     filteredPokemonList: (state) => {
-      return state.pokemonList.filter((pokemon) =>
-        pokemon.name.toLowerCase().includes(state.searchTerm.toLowerCase())
-      );
+      return state.pokemonList.filter((pokemon) => {
+        const matchesSearchTerm = pokemon.name
+          .toLowerCase()
+          .includes(state.searchTerm.toLowerCase());
+        const matchesView =
+          state.view === 'all' || state.favorites.includes(pokemon.name);
+        return matchesSearchTerm && matchesView;
+      });
     },
     favoritePokemon: (state) => {
       return state.pokemonList.filter((pokemon) =>

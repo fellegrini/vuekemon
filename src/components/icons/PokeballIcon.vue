@@ -79,7 +79,8 @@
 
 <style lang="scss">
 .icons--pokeball {
-  animation: catchAnimation 1s cubic-bezier(0.36, 0.07, 0.19, 0.97) 0.4s 3;
+  animation: catchAnimation 1s cubic-bezier(0.36, 0.07, 0.19, 0.97) 0.4s
+    infinite;
 }
 
 @keyframes catchAnimation {

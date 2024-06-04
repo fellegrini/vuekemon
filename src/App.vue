@@ -23,7 +23,6 @@ import { RouterView } from 'vue-router';
 
 .slide-enter-from,
 .slide-leave-to {
-  opacity: 0;
-  transform: translateY(-100%);
+  transform: translateY(-99%);
 }
 </style>
