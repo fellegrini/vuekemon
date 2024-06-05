@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { usePokemonStore, type Pokemon } from '@/store/pokestore';
-import missing from '../assets/img/missing.webp';
+import missing from '@/assets/img/missing.webp';
 import Star from '@/components/StarComponent.vue';
 import capitalizeFirstLetter from '@/utils/capitalize';
-import Button from './ButtonComponent.vue';
+import Button from '@/components/ButtonComponent.vue';
 
 const buttonText = ref('Share to my friends');
 const pokemonStore = usePokemonStore();

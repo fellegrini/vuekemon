@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted } from 'vue';
-import CrossIcon from './icons/CrossIcon.vue';
+import CrossIcon from '@/components/icons/CrossIcon.vue';
 
 const props = defineProps<{ visible: boolean }>();
 const emits = defineEmits(['close']);
