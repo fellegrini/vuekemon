@@ -166,11 +166,19 @@ const copyToClipboard = () => {
     width: 100%;
     padding: 0 32px 16px;
     margin-top: 8px;
+
+    @include breakpoint('lg') {
+      justify-content: space-between;
+    }
   }
 
   &-button {
     flex: 1;
     margin-right: 16px;
+
+    @include breakpoint('lg') {
+      flex: 0;
+    }
   }
 }
 

@@ -115,6 +115,7 @@ export const usePokemonStore = defineStore('pokestore', {
         state.favorites.includes(pokemon.name)
       );
     },
-    errorMessage: (state) => state.error
+    errorMessage: (state) => state.error,
+    getHasFavorites: (state) => state.favorites.length > 0
   }
 });

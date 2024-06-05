@@ -50,6 +50,26 @@ onUnmounted(() => {
   z-index: 1000;
   overflow: hidden;
 
+  @include breakpoint('sm') {
+    padding: 0 24px;
+  }
+
+  @include breakpoint('md') {
+    padding: 0 120px;
+  }
+
+  @include breakpoint('lg') {
+    padding: 0 212px;
+  }
+
+  @include breakpoint('xl') {
+    padding: 0 360px;
+  }
+
+  @include breakpoint('xxl') {
+    padding: 0 640px;
+  }
+
   &-content {
     background-color: #fff;
     border-radius: $border--radius;

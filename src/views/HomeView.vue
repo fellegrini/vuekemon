@@ -14,6 +14,7 @@ const descriptionText =
     <h1 class="vuekemon--home-headline">{{ headlineText }}</h1>
     <p class="vuekemon--home-description">{{ descriptionText }}</p>
     <Button
+      class="vuekemon--home-button"
       type="primary"
       @click="$router.push({ name: 'pokedex' })"
       >{{ buttonText }}</Button
@@ -32,6 +33,26 @@ const descriptionText =
   overflow: hidden;
   text-align: center;
 
+  @include breakpoint('sm') {
+    padding: 48px 48px 128px;
+  }
+
+  @include breakpoint('md') {
+    padding: 48px 80px 128px;
+  }
+
+  @include breakpoint('lg') {
+    padding: 48px 240px;
+  }
+
+  @include breakpoint('xl') {
+    padding: 48px 480px;
+  }
+
+  @include breakpoint('xxl') {
+    padding: 48px 720px;
+  }
+
   &-headline {
     color: $colors--black;
     font-size: 26px;
@@ -46,6 +67,10 @@ const descriptionText =
     color: $colors--grey;
     margin: 24px 0 48px 0;
     justify-self: center;
+  }
+
+  &-button {
+    max-width: 140px;
   }
 }
 </style>

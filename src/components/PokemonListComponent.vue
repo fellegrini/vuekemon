@@ -104,7 +104,13 @@ watch(
   width: 100%;
   overflow-y: scroll;
   scrollbar-width: none;
-  padding-bottom: 120px;
+  padding-bottom: 128px;
+  overflow-x: hidden;
+  position: relative;
+
+  @include breakpoint('xxl') {
+    padding-bottom: 220px;
+  }
 
   &::-webkit-scrollbar {
     display: none;
@@ -157,7 +163,10 @@ watch(
   }
 
   .list-leave-active {
-    transform: translateX(100%);
+    transform: translateY(-100%);
+    position: absolute;
+    opacity: 0;
+    width: 100%;
   }
 }
 </style>

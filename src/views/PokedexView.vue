@@ -40,7 +40,10 @@ const closeModal = () => {
         <div class="vuekemon--pokedex-list">
           <SearchBar @search="handleSearch" />
           <PokemonList @show-modal="showModal" />
-          <BottomBar @change-active="handleViewChange" />
+          <BottomBar
+            @change-active="handleViewChange"
+            :has-favorites="!!pokemonStore.getHasFavorites"
+          />
         </div>
       </template>
       <template #fallback>
@@ -68,6 +71,7 @@ const closeModal = () => {
 <style lang="scss">
 .vuekemon--pokedex,
 .vuekemon--pokeball-loader {
+  height: 100%;
   min-height: 100%;
   width: 100%;
   background-color: $colors--background;
@@ -79,6 +83,26 @@ const closeModal = () => {
   height: 100%;
   width: 100%;
   padding: 24px;
+
+  @include breakpoint('sm') {
+    padding: 24px 48px;
+  }
+
+  @include breakpoint('md') {
+    padding: 32px 80px;
+  }
+
+  @include breakpoint('lg') {
+    padding: 32px 240px;
+  }
+
+  @include breakpoint('xl') {
+    padding: 32px 360px;
+  }
+
+  @include breakpoint('xxl') {
+    padding: 48px 480px;
+  }
 }
 
 .vuekemon--pokeball-loader {
