@@ -104,9 +104,9 @@ watch(
   width: 100%;
   overflow-y: scroll;
   scrollbar-width: none;
-  padding-bottom: 128px;
   overflow-x: hidden;
   position: relative;
+  padding-bottom: 180px;
 
   @include breakpoint('xxl') {
     padding-bottom: 220px;

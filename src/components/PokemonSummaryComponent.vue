@@ -125,6 +125,7 @@ const copyToClipboard = () => {
     height: 220px;
     background-color: $colors--grey-light;
     background: url('../assets/img/background.webp') no-repeat center;
+    background-size: cover;
     display: grid;
     place-items: center;
   }

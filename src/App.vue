@@ -28,8 +28,14 @@ router.beforeEach(() => {
   transition: all 0.4s 0.1s cubic-bezier(0.68, -0.55, 0.265, 1.5);
 }
 
-.slide-enter-from,
+.slide-enter-from:not(.vuekemon--home),
 .slide-leave-to {
   transform: translateY(-99%);
+  opacity: 0;
+}
+
+.slide-enter-from {
+  /* Fixes an issue where Lighthouse couldn't detect the LCP element */
+  opacity: 0.01;
 }
 </style>

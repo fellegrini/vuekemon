@@ -67,6 +67,10 @@ const descriptionText =
     color: $colors--grey;
     margin: 24px 0 48px 0;
     justify-self: center;
+
+    @include breakpoint('lg') {
+      max-width: 95%;
+    }
   }
 
   &-button {
