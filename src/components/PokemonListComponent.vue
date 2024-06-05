@@ -106,10 +106,10 @@ watch(
   scrollbar-width: none;
   overflow-x: hidden;
   position: relative;
-  padding-bottom: 180px;
+  padding-bottom: 200px;
 
   @include breakpoint('xxl') {
-    padding-bottom: 220px;
+    padding-bottom: 240px;
   }
 
   &::-webkit-scrollbar {
